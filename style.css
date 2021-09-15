@@ -1,0 +1,84 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.gameArea{
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.gameArea .controls{
+    display: flex;
+    width: 100%;
+    height: 20%;
+    opacity: 0.3;
+    position: absolute;
+    bottom: 0;
+  
+
+}
+.controls div{
+    flex: 1;
+}
+.left{
+    background-color: yellow;
+}
+.right{
+    background-color: lightblue;
+}
+.fighter{
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    bottom: 100px;
+    left: 40vw;
+}
+.fighter img{
+    z-index: 1000
+}
+.enemy{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    left: 200px;
+    top: 100px;
+}
+.enemy img{
+    width: 100px;
+    height: 100px;
+    /* animation: blast 0.5s linear ; */
+}
+.fireButton{
+    width: 80px;
+    height: 80px;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 180px;
+    right: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: -2px 2px 2px grey;
+    opacity: 0.5;
+}
+.fireButton img{
+    width: 50px;
+    height: 50px;
+    /* position: absolute;
+    left: 50%;
+    top: 50%; */
+}
+
+@keyframes blast {
+    0%{
+        transform: scale(1);
+    }
+    100%{
+        transform: scale(0.1);
+        filter: blur(10px);
+    }
+}
