@@ -49,22 +49,54 @@ let enemyPosArray = []
 
 // console.log(enemyPosArray)
 
+//enemy constructor 
 
-//-creating the dynamic enemy
-let enemyContainer = document.createElement('div')
-let dynamicEnemy = document.createElement('img')
-enemyContainer.style.position = 'absolute' 
-enemyContainer.style.width = '50px' 
-enemyContainer.style.height = '50px' 
-enemyContainer.style.left = '320px' 
-enemyContainer.style.top = '20px' 
+let enemyArray = ['50px','150px','250px','350px','450px','550px']
+let enemyContainer;
+const creatEnemy2 =()=>{
+    enemyArray.map((data,index)=>{
 
-dynamicEnemy.src="./enemy.svg"
-dynamicEnemy.style.width='50px'
-dynamicEnemy.style.height='50px'
+        enemyContainer = document.createElement('div')
+   let dynamicEnemy = document.createElement('img')
+   enemyContainer.id = 'enemy'+index
+   enemyContainer.style.position = 'absolute' 
+   enemyContainer.style.width = '50px' 
+   enemyContainer.style.height = '50px' 
+   enemyContainer.style.left = data 
+   enemyContainer.style.top = '20px' 
+   
+   dynamicEnemy.src="./enemy.svg"
+   dynamicEnemy.style.width='50px'
+   dynamicEnemy.style.height='50px'
+   
+   document.body.appendChild(enemyContainer)
+   enemyContainer.appendChild(dynamicEnemy)
+   })
+}
 
-document.body.appendChild(enemyContainer)
-enemyContainer.appendChild(dynamicEnemy)
+creatEnemy2()
+    // let enemyContainer,dynamicEnemy
+
+
+
+
+
+
+// //-creating the dynamic enemy
+// let enemyContainer = document.createElement('div')
+// let dynamicEnemy = document.createElement('img')
+// enemyContainer.style.position = 'absolute' 
+// enemyContainer.style.width = '50px' 
+// enemyContainer.style.height = '50px' 
+// enemyContainer.style.left = '320px' 
+// enemyContainer.style.top = '20px' 
+
+// dynamicEnemy.src="./enemy.svg"
+// dynamicEnemy.style.width='50px'
+// dynamicEnemy.style.height='50px'
+
+// document.body.appendChild(enemyContainer)
+// enemyContainer.appendChild(dynamicEnemy)
 //--creating the dynamic enemy
 
 
@@ -74,41 +106,52 @@ const stop = ()=>{
 }
 
 //enemey position getting
-let enemyTop = parseInt(window.getComputedStyle(enemyContainer,null).getPropertyValue('top'))
-let enemyLeft = parseInt(window.getComputedStyle(enemyContainer,null).getPropertyValue('left'))
+// let enemyTop = parseInt(window.getComputedStyle(enemyContainer,null).getPropertyValue('top'))
+// let enemyLeft = parseInt(window.getComputedStyle(enemyContainer,null).getPropertyValue('left'))
 let enemyWidth = 50
 let enemyHeight = 50
+let allenemyTop = 20
 
 // checking blast
 const checkBlast = (missileTop,missileLeft)=>{
 
-    //map from all enemy position
-
-    if(missileTop<=enemyTop+enemyHeight){
-        console.log("enemetytop + heihgt ",enemyTop+enemyHeight," ",missileTop)
-        if(missileTop>=enemyTop){
-            console.log("enetop ",enemyTop," ",missileTop)
-            if(missileLeft<=enemyLeft+enemyWidth){
-                console.log("enemyleft + widht ",enemyLeft+enemyWidth," ",missileLeft)
-                if(missileLeft>=enemyLeft){
-                    console.log("enemyleft ",enemyLeft," ",missileLeft)
-                    console.log('blasted')
-                    document.body.removeChild(missile)
-                    enemyContainer.style.animation = 'blast 0.2s linear'
-
-                    setTimeout(() => {
-                        enemyContainer.style.animation = ''
-                    }, 500);
-                    //giving the enemy to random position
-                    // enemyTop = parseInt(window.getComputedStyle(enemy1,null).getPropertyValue('top'))
-                    enemyLeft = parseInt(window.getComputedStyle(enemyContainer,null).getPropertyValue('left'))
-                    enemyLeft = enemyLeft+100
-                    enemyContainer.style.left = enemyLeft+"px"
-                    
+    enemyArray.map((data,index)=>{
+        if(missileTop<=allenemyTop+enemyHeight){
+            console.log("enemetytop + heihgt ",allenemyTop+enemyHeight," ",missileTop)
+            if(missileTop>=allenemyTop){
+                console.log("enetop ",allenemyTop," ",missileTop)
+                // scoreElem.innerHTML= score++
+                if(missileLeft<=parseInt(data)+enemyWidth){
+                    console.log("enemyleft + widht ",parseInt(data)+enemyWidth," ",missileLeft)
+                    // scoreElem.innerHTML= score++
+                    if(missileLeft>=parseInt(data)){
+                        console.log("enemyleft ",parseInt(data)," ",missileLeft)
+                        console.log('blasted')
+                        document.body.removeChild(missile)
+                        score++
+                        scoreElem.innerHTML= score
+                        document.body.removeChild(document.getElementById('enemy'+index))
+                        if(score%6==0){
+                            creatEnemy2()
+                        }
+                        //remove element from array
+                        // enemyArray.splice(index,1)
+                        // document.body.removeChild(enemyContainer)
+                        //giving the enemy to random position
+                        // enemyTop = parseInt(window.getComputedStyle(enemy1,null).getPropertyValue('top'))
+                        // enemyLeft = parseInt(window.getComputedStyle(enemyContainer,null).getPropertyValue('left'))
+                        // enemyLeft = enemyLeft+100
+                        // enemyContainer.style.left = enemyLeft+"px"
+                        
+                    }
                 }
             }
         }
-    }
+    })
+
+    //map from all enemy position
+
+   
    
     
 }
@@ -195,7 +238,7 @@ const fire = ()=>{
         missile.style.top = nextPosition+"px"
     }, -5);
 
-    scoreElem.innerHTML = score++
+    // scoreElem.innerHTML = score++
 }
 
 
