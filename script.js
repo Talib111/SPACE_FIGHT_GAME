@@ -2,7 +2,15 @@ let fighter = document.getElementById('fighter');
 let leftKey = document.getElementById('left');
 let rightKey = document.getElementById('right');
 let gameArea = document.getElementById('gameArea');
-let enemy1 = document.getElementById('enemeyDiv');
+let scoreElem = document.getElementById('score')
+let score = 0
+// let enemy1 = document.getElementById('enemeyDiv');
+
+// gameArea.requestFullscreen().then(function(){
+//     console.log('full screen enabled')
+// }).catch(function(){
+//     console.log('errrorr')
+// })
 var leftInterval,rightInterval
 
 let enemyPosArray = []
@@ -41,7 +49,22 @@ let enemyPosArray = []
 // console.log(enemyPosArray)
 
 
-//-creating the enemy
+//-creating the dynamic enemy
+let enemyContainer = document.createElement('div')
+let dynamicEnemy = document.createElement('img')
+enemyContainer.style.position = 'absolute' 
+enemyContainer.style.width = '50px' 
+enemyContainer.style.height = '50px' 
+enemyContainer.style.left = '320px' 
+enemyContainer.style.top = '20px' 
+
+dynamicEnemy.src="./enemy.svg"
+dynamicEnemy.style.width='50px'
+dynamicEnemy.style.height='50px'
+
+document.body.appendChild(enemyContainer)
+enemyContainer.appendChild(dynamicEnemy)
+//--creating the dynamic enemy
 
 
 const stop = ()=>{
@@ -50,8 +73,8 @@ const stop = ()=>{
 }
 
 //enemey position getting
-let enemyTop = parseInt(window.getComputedStyle(enemy1,null).getPropertyValue('top'))
-let enemyLeft = parseInt(window.getComputedStyle(enemy1,null).getPropertyValue('left'))
+let enemyTop = parseInt(window.getComputedStyle(enemyContainer,null).getPropertyValue('top'))
+let enemyLeft = parseInt(window.getComputedStyle(enemyContainer,null).getPropertyValue('left'))
 let enemyWidth = 50
 let enemyHeight = 50
 
@@ -70,16 +93,16 @@ const checkBlast = (missileTop,missileLeft)=>{
                     console.log("enemyleft ",enemyLeft," ",missileLeft)
                     console.log('blasted')
                     document.body.removeChild(missile)
-                    enemy1.style.animation = 'blast 0.2s linear'
+                    enemyContainer.style.animation = 'blast 0.2s linear'
 
                     setTimeout(() => {
-                        enemy1.style.animation = ''
+                        enemyContainer.style.animation = ''
                     }, 500);
                     //giving the enemy to random position
                     // enemyTop = parseInt(window.getComputedStyle(enemy1,null).getPropertyValue('top'))
-                    enemyLeft = parseInt(window.getComputedStyle(enemy1,null).getPropertyValue('left'))
+                    enemyLeft = parseInt(window.getComputedStyle(enemyContainer,null).getPropertyValue('left'))
                     enemyLeft = enemyLeft+100
-                    enemy1.style.left = enemyLeft+"px"
+                    enemyContainer.style.left = enemyLeft+"px"
                     
                 }
             }
@@ -169,9 +192,105 @@ const fire = ()=>{
         let nextPosition = missileTop -2
         missile.style.top = nextPosition+"px"
     }, -5);
+
+    scoreElem.innerHTML = score++
 }
 
 
+let loadingBackground = document.createElement('div')
+loadingBackground.style.height= '100vh'
+loadingBackground.style.width = '100vw'
+loadingBackground.style.backgroundImage='linear-gradient(180deg,black,red,white)'
+loadingBackground.style.position = 'absolute'
+loadingBackground.style.left = '0'
+loadingBackground.style.top = '0'
+loadingBackground.style.zIndex = 100000
+loadingBackground.style.display = 'flex'
+loadingBackground.style.justifyContent = 'center'
+loadingBackground.style.alignItems = 'center'
+document.body.appendChild(loadingBackground)
+
+
+//text
+let introText = document.createElement('h1')
+introText.style.textAlign = 'center'
+introText.style.position = 'absolute'
+introText.style.color = 'white'
+introText.style.top = '100px'
+introText.innerHTML = 'Space Shooter'
+loadingBackground.appendChild(introText)
+
+
+
+
+//loadinbar div
+let loadinbar = document.createElement('div')
+loadinbar.style.width = '400px'
+loadinbar.style.height = '30px'
+loadinbar.style.border = '2px solid white'
+loadinbar.style.position = 'absolute'
+loadinbar.style.borderRadius = '10px'
+
+
+loadingBackground.appendChild(loadinbar)
+
+//inside loadinbar div
+let loadinbarInside = document.createElement('div')
+// loadinbarInside.style.width = '200px'
+loadinbarInside.style.height = '30px'
+loadinbarInside.style.position = 'absolute'
+loadinbarInside.style.backgroundImage='linear-gradient(90deg,black,yellow)'
+loadinbarInside.style.textAlign = 'center'
+loadinbarInside.style.color = 'white'
+loadinbarInside.style.display = 'flex'
+loadinbarInside.style.justifyContent = 'center'
+loadinbarInside.style.alignItems = 'center'
+loadinbarInside.style.borderRadius = '10px'
+
+
+let loadbarWidth =0
+loadinbar.appendChild(loadinbarInside)
+let loadingInterval = setInterval(() => {
+    console.log('working')
+    loadbarWidth++
+    loadinbarInside.style.width = loadbarWidth + "px"
+    loadinbarInside.innerHTML=loadbarWidth
+    if(loadbarWidth==400){
+        clearInterval(loadingInterval)
+        //call to create play button
+        createPlay()
+    }
+}, 5);
+
+
+//play button
+let playButton = document.createElement('button')
+playButton.style.textAlign = 'center'
+playButton.style.color = 'black'
+playButton.innerHTML = 'PLAY'
+playButton.style.position = 'relative'
+playButton.style.top = '70px'
+playButton.style.backgroundColor = 'yellow'
+playButton.style.width = '120px'
+playButton.style.height = '45px'
+playButton.style.borderRadius = '20px'
+playButton.style.fontWeight = 800
+
+const createPlay = ()=>{
+    loadingBackground.appendChild(playButton)
+
+}
+//play button call
+playButton.addEventListener('click',function(){
+    console.log('play')
+    document.body.removeChild(loadingBackground)
+    document.body.requestFullscreen().then(function(){
+        console.log('full screen enabled')
+    }).catch(function(){
+        console.log('errrorr')
+    })
+    screen.orientation.lock("landscape")
+})
 
 /////////  LEARN LOGIC ////////
 
