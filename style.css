@@ -65,6 +65,7 @@
     align-items: center;
     box-shadow: -2px 2px 2px grey;
     opacity: 0.5;
+    z-index: 10000;
 }
 .fireButton img{
     width: 50px;

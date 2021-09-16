@@ -75,6 +75,11 @@ const checkBlast = (missileTop,missileLeft)=>{
                     setTimeout(() => {
                         enemy1.style.animation = ''
                     }, 500);
+                    //giving the enemy to random position
+                    // enemyTop = parseInt(window.getComputedStyle(enemy1,null).getPropertyValue('top'))
+                    enemyLeft = parseInt(window.getComputedStyle(enemy1,null).getPropertyValue('left'))
+                    enemyLeft = enemyLeft+100
+                    enemy1.style.left = enemyLeft+"px"
                     
                 }
             }
@@ -165,7 +170,6 @@ const fire = ()=>{
         missile.style.top = nextPosition+"px"
     }, -5);
 }
-rightKey.addEventListener('click',fire)
 
 
 
