@@ -1,3 +1,4 @@
+
 let fighter = document.getElementById('fighter');
 let leftKey = document.getElementById('left');
 let rightKey = document.getElementById('right');
@@ -159,6 +160,7 @@ missile.style.position = 'absolute'
 //*creating missile
 
 var fireInterval
+let fireSound = new Audio('./shoot.wav')
 
 const activateMissile = ()=>{
     let fighterLeft = parseInt(window.getComputedStyle(fighter,null).getPropertyValue('left'))
@@ -172,7 +174,7 @@ const fire = ()=>{
 
     
     //fire sound
-    let fireSound = new Audio('./shoot.wav')
+    fireSound.currentTime = 0
     fireSound.play()
     //activating the missile
    activateMissile()
@@ -197,7 +199,10 @@ const fire = ()=>{
 }
 
 
-let loadingBackground = document.createElement('div')
+let playButton;
+let loadingBackground;
+const splashScreen = ()=>{
+ loadingBackground = document.createElement('div')
 loadingBackground.style.height= '100vh'
 loadingBackground.style.width = '100vw'
 loadingBackground.style.backgroundImage='linear-gradient(180deg,black,red,white)'
@@ -264,7 +269,7 @@ let loadingInterval = setInterval(() => {
 
 
 //play button
-let playButton = document.createElement('button')
+ playButton = document.createElement('button')
 playButton.style.textAlign = 'center'
 playButton.style.color = 'black'
 playButton.innerHTML = 'PLAY'
@@ -280,9 +285,11 @@ const createPlay = ()=>{
     loadingBackground.appendChild(playButton)
 
 }
-//play button call
-playButton.addEventListener('click',function(){
-    console.log('play')
+}
+
+splashScreen()
+
+const removeSplash = ()=>{
     document.body.removeChild(loadingBackground)
     document.body.requestFullscreen().then(function(){
         console.log('full screen enabled')
@@ -290,6 +297,11 @@ playButton.addEventListener('click',function(){
         console.log('errrorr')
     })
     screen.orientation.lock("landscape")
+}
+
+//play button call
+playButton.addEventListener('click',function(){
+    removeSplash()
 })
 
 /////////  LEARN LOGIC ////////
