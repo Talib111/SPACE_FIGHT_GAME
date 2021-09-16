@@ -2,12 +2,7 @@ let fighter = document.getElementById('fighter');
 let leftKey = document.getElementById('left');
 let rightKey = document.getElementById('right');
 let gameArea = document.getElementById('gameArea');
-let enemy1 = document.getElementById('enemy1');
-let enemy2 = document.getElementById('enemy2');
-let enemy3 = document.getElementById('enemy3');
-let enemy4 = document.getElementById('enemy4');
-let enemy5 = document.getElementById('enemy5');
-let enemy6 = document.getElementById('enemy6');
+let enemy1 = document.getElementById('enemeyDiv');
 var leftInterval,rightInterval
 
 let enemyPosArray = []
@@ -59,84 +54,39 @@ let enemyTop = parseInt(window.getComputedStyle(enemy1,null).getPropertyValue('t
 let enemyLeft = parseInt(window.getComputedStyle(enemy1,null).getPropertyValue('left'))
 let enemyWidth = 50
 let enemyHeight = 50
-let enemyArray = [{enemyTop: 20,enemyLeft: 50,enemey: 'enemy1'},{enemyTop: 20,enemyLeft: 150,enemey: 'enemy2'},{enemyTop: 20,enemyLeft: 250,enemey: 'enemy3'},{enemyTop: 20,enemyLeft: 350,enemey: 'enemy4'},{enemyTop: 20,enemyLeft: 450,enemey: 'enemy5'},{enemyTop: 20,enemyLeft: 550,enemey: 'enemy6'}]
 
 // checking blast
 const checkBlast = (missileTop,missileLeft)=>{
 
     //map from all enemy position
-enemyArray.map((data,index)=>{
 
-    if(missileTop<=data.enemyTop+enemyHeight){
-        console.log("enemetytop + heihgt ",data.enemyTop+enemyHeight," ",missileTop)
-        if(missileTop>=data.enemyTop){
-            console.log("enetop ",data.enemyTop," ",missileTop)
-            if(missileLeft<=data.enemyLeft+enemyWidth){
-                console.log("enemyleft + widht ",data.enemyLeft+enemyWidth," ",missileLeft)
-                if(missileLeft>=data.enemyLeft){
-                    console.log("enemyleft ",data.enemyLeft," ",missileLeft)
+    if(missileTop<=enemyTop+enemyHeight){
+        console.log("enemetytop + heihgt ",enemyTop+enemyHeight," ",missileTop)
+        if(missileTop>=enemyTop){
+            console.log("enetop ",enemyTop," ",missileTop)
+            if(missileLeft<=enemyLeft+enemyWidth){
+                console.log("enemyleft + widht ",enemyLeft+enemyWidth," ",missileLeft)
+                if(missileLeft>=enemyLeft){
+                    console.log("enemyleft ",enemyLeft," ",missileLeft)
                     console.log('blasted')
                     document.body.removeChild(missile)
-                    console.log('index no ',index)
+                    enemy1.style.animation = 'blast 0.2s linear'
 
-                    //removing child with index number
-                    if(index==0){
-                        enemy1.style.animation = 'blast 0.5s linear'
-    
-                        setTimeout(() => {
-                            enemy1.style.animation = ''
-                        }, 500);
-                    }
-                    else if(index==1){
-                        enemy2.style.animation = 'blast 0.5s linear'
-    
-                        setTimeout(() => {
-                            enemy1.style.animation = ''
-                        }, 500);
-                    }
-                    else if(index==2){
-                        enemy3.style.animation = 'blast 0.5s linear'
-    
-                        setTimeout(() => {
-                            enemy1.style.animation = ''
-                        }, 500);
-                    }
-                    else if(index==3){
-                        enemy4.style.animation = 'blast 0.5s linear'
-    
-                        setTimeout(() => {
-                            enemy1.style.animation = ''
-                        }, 500);
-                    }
-                    else if(index==4){
-                        enemy5.style.animation = 'blast 0.5s linear'
-    
-                        setTimeout(() => {
-                            enemy1.style.animation = ''
-                        }, 500);
-                    }
-                    else {
-                        enemy6.style.animation = 'blast 0.5s linear'
-    
-                        setTimeout(() => {
-                            enemy1.style.animation = ''
-                        }, 500);
-                    }
-                   
+                    setTimeout(() => {
+                        enemy1.style.animation = ''
+                    }, 500);
                     
                 }
             }
         }
     }
-})
-    
    
     
 }
 // checking blast
 
 
-leftKey.addEventListener('click',function (){
+leftKey.addEventListener('touchstart',function (){
     clearInterval(leftInterval)
     clearInterval(rightInterval)
       leftInterval = setInterval(() => {
@@ -144,12 +94,12 @@ leftKey.addEventListener('click',function (){
         if(leftPos==0){
             leftPos = window.innerWidth
         }
-        let nextPosition = leftPos - 2
+        let nextPosition = leftPos - 5
         fighter.style.left = nextPosition+"px"
     }, 10);
 })
 
-rightKey.addEventListener('click',function (){
+rightKey.addEventListener('touchstart',function (){
     clearInterval(leftInterval)
     clearInterval(rightInterval)
       leftInterval = setInterval(() => {
@@ -157,9 +107,17 @@ rightKey.addEventListener('click',function (){
         if(leftPos==window.innerWidth){
             leftPos = 0
         }
-        let nextPosition = leftPos + 2
+        let nextPosition = leftPos + 5
         fighter.style.left = nextPosition+"px"
     }, 10);
+})
+rightKey.addEventListener('touchend',function(){
+    clearInterval(leftInterval)
+    clearInterval(rightInterval)
+})
+leftKey.addEventListener('touchend',function(){
+    clearInterval(leftInterval)
+    clearInterval(rightInterval)
 })
 
 //creating missile
@@ -168,7 +126,6 @@ missile.style.width='5px'
 missile.style.height='20px'
 missile.style.backgroundColor='yellow'
 missile.style.position = 'absolute'
-missile.style.left = '44.5%'
 // missile.style.top = '200px'
 //     document.body.appendChild(missile)
 //*creating missile
@@ -176,7 +133,10 @@ missile.style.left = '44.5%'
 var fireInterval
 
 const activateMissile = ()=>{
-    missile.style.top = '200px'
+    let fighterLeft = parseInt(window.getComputedStyle(fighter,null).getPropertyValue('left'))
+    let missileLeftTarget = fighterLeft+24
+    missile.style.left = missileLeftTarget+"px"
+    missile.style.top = '220px'
     document.body.appendChild(missile)
 }
 const fire = ()=>{
