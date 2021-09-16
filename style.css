@@ -41,14 +41,38 @@
 }
 .enemy{
     position: absolute;
-    width: 100px;
-    height: 100px;
-    left: 200px;
-    top: 100px;
+    width: 50px;
+    height: 50px;
+   
+    background-color: white;
+}
+.enemy1{
+    left: 50px;
+    top: 20px;
+}
+.enemy2{
+    left: 150px;
+    top: 20px;
+}
+.enemy3{
+    left: 320px;
+    top: 20px;
+}
+.enemy4{
+    left: 650px;
+    top: 20px;
+}
+.enemy5{
+    left: 450px;
+    top: 20px;
+}
+.enemy6{
+    left: 550px;
+    top: 20px;
 }
 .enemy img{
-    width: 100px;
-    height: 100px;
+    width: 50px;
+    height: 50px;
     /* animation: blast 0.5s linear ; */
 }
 .fireButton{
@@ -78,7 +102,9 @@
         transform: scale(1);
     }
     100%{
+        background-color: red;
         transform: scale(0.1);
-        filter: blur(10px);
+        filter: blur(20px);
+        box-shadow: 5px 5px 5px grey;
     }
 }
