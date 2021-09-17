@@ -5,11 +5,22 @@
 .gameArea{
     width: 100vw;
     height: 100vh;
-    background-image: url(./gamebg2.png);
     position: absolute;
+    /* background-image: url(./gamebg2.png); */
     top: 0;
     left: 0;
 }
+.moveingarea{
+    width: 100vw;
+    height: 200vh;
+    background-color: yellow;
+   
+    background-image: url(./gamebg2.png);
+
+
+}
+
+
 .gameArea .controls{
     display: flex;
     width: 100%;
@@ -90,7 +101,7 @@ opacity: 0.3;
 .score{
     position: absolute;
     left: 10px;
-    z-index: 100000;
+    z-index: 1000000;
     color: white;
     
 }
@@ -105,4 +116,7 @@ opacity: 0.3;
         filter: blur(20px);
         box-shadow: 5px 5px 5px grey;
     }
+}
+.mrk{
+    height: 100vh;
 }

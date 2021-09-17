@@ -22,6 +22,9 @@ function elementCreator (elementType,style){
 }
 /////////////// element constructor function/////////////
 
+//Moving background creationg
+
+
 //enemy constructor
 let enemyArray = ["50px", "150px", "250px", "350px", "450px", "550px"];
 let enemyContainer;
