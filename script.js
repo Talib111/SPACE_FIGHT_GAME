@@ -61,43 +61,43 @@ const checkBlast = (missileTop, missileLeft) => {
     //map from all enemy position
 };
 // checking blast
+let moveInterval;
 
-leftKey.addEventListener("touchstart", function () {
-    clearInterval(leftInterval);
-    clearInterval(rightInterval);
-    leftInterval = setInterval(() => {
+function moveFighter(direction){
+
+    clearInterval(moveInterval)
+         moveInterval = setInterval(() => {
+        let nextPosition
         let leftPos = parseInt(
             window.getComputedStyle(fighter, null).getPropertyValue("left")
         );
         if (leftPos == 0) {
             leftPos = window.innerWidth;
         }
-        let nextPosition = leftPos - 5;
+        if(direction=='left'){
+            nextPosition = leftPos - 5;
+        }
+        else{
+            nextPosition = leftPos + 5;
+        }
+       
         fighter.style.left = nextPosition + "px";
+        // scoreElem.innerHTML = score++
     }, 10);
+}
+
+leftKey.addEventListener("touchstart", function () {
+    moveFighter('left')
 });
 
 rightKey.addEventListener("touchstart", function () {
-    clearInterval(leftInterval);
-    clearInterval(rightInterval);
-    leftInterval = setInterval(() => {
-        let leftPos = parseInt(
-            window.getComputedStyle(fighter, null).getPropertyValue("left")
-        );
-        if (leftPos == window.innerWidth) {
-            leftPos = 0;
-        }
-        let nextPosition = leftPos + 5;
-        fighter.style.left = nextPosition + "px";
-    }, 10);
+    moveFighter('right')
 });
 rightKey.addEventListener("touchend", function () {
-    clearInterval(leftInterval);
-    clearInterval(rightInterval);
+    clearInterval(moveInterval);
 });
 leftKey.addEventListener("touchend", function () {
-    clearInterval(leftInterval);
-    clearInterval(rightInterval);
+    clearInterval(moveInterval);
 });
 
 //creating missile
@@ -117,7 +117,7 @@ const activateMissile = () => {
     );
     let missileLeftTarget = fighterLeft + 24;
     missile.style.left = missileLeftTarget + "px";
-    missile.style.top = "220px";
+    missile.style.top = "300px";
     document.body.appendChild(missile);
 };
 const fire = () => {
@@ -142,7 +142,7 @@ const fire = () => {
             document.body.removeChild(missile);
             clearInterval(fireInterval);
         }
-        let nextPosition = missileTop - 2;
+        let nextPosition = missileTop - 5;
         missile.style.top = nextPosition + "px";
     }, -5);
 
