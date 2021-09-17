@@ -105,9 +105,7 @@ const stop = ()=>{
     clearInterval(rightInterval)
 }
 
-//enemey position getting
-// let enemyTop = parseInt(window.getComputedStyle(enemyContainer,null).getPropertyValue('top'))
-// let enemyLeft = parseInt(window.getComputedStyle(enemyContainer,null).getPropertyValue('left'))
+
 let enemyWidth = 50
 let enemyHeight = 50
 let allenemyTop = 20
@@ -116,35 +114,33 @@ let allenemyTop = 20
 const checkBlast = (missileTop,missileLeft)=>{
 
     enemyArray.map((data,index)=>{
-        if(missileTop<=allenemyTop+enemyHeight){
-            console.log("enemetytop + heihgt ",allenemyTop+enemyHeight," ",missileTop)
-            if(missileTop>=allenemyTop){
-                console.log("enetop ",allenemyTop," ",missileTop)
-                // scoreElem.innerHTML= score++
-                if(missileLeft<=parseInt(data)+enemyWidth){
-                    console.log("enemyleft + widht ",parseInt(data)+enemyWidth," ",missileLeft)
-                    // scoreElem.innerHTML= score++
-                    if(missileLeft>=parseInt(data)){
-                        console.log("enemyleft ",parseInt(data)," ",missileLeft)
-                        console.log('blasted')
-                        document.body.removeChild(missile)
-                        score++
-                        scoreElem.innerHTML= score
-                        document.body.removeChild(document.getElementById('enemy'+index))
-                        if(score%6==0){
-                            creatEnemy2()
-                        }
-                        //remove element from array
-                        // enemyArray.splice(index,1)
-                        // document.body.removeChild(enemyContainer)
-                        //giving the enemy to random position
-                        // enemyTop = parseInt(window.getComputedStyle(enemy1,null).getPropertyValue('top'))
-                        // enemyLeft = parseInt(window.getComputedStyle(enemyContainer,null).getPropertyValue('left'))
-                        // enemyLeft = enemyLeft+100
-                        // enemyContainer.style.left = enemyLeft+"px"
+        // if(missileTop<=allenemyTop+enemyHeight){
+        //     if(missileTop>=allenemyTop){
+        //         // scoreElem.innerHTML= score++
+        //         if(missileLeft<=parseInt(data)+enemyWidth){
+        //             // scoreElem.innerHTML= score++
+        //             if(missileLeft>=parseInt(data)){
+        //                 document.body.removeChild(missile)
+        //                 score++
+        //                 scoreElem.innerHTML= score
+        //                 document.body.removeChild(document.getElementById('enemy'+index))
+        //                 if(score%6==0){
+        //                     creatEnemy2()
+        //                 }
+                       
                         
-                    }
-                }
+        //             }
+        //         }
+        //     }
+        // }
+
+         if(missileTop<=allenemyTop+enemyHeight) if(missileTop>=allenemyTop)  if(missileLeft<=parseInt(data)+enemyWidth) if(missileLeft>=parseInt(data)) {
+            document.body.removeChild(missile)
+            score++
+            scoreElem.innerHTML= score
+            document.body.removeChild(document.getElementById('enemy'+index))
+            if(score%6==0){
+                creatEnemy2()
             }
         }
     })
