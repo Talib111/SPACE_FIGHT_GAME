@@ -1,0 +1,122 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.gameArea{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    /* background-image: url(./gamebg2.png); */
+    top: 0;
+    left: 0;
+}
+.moveingarea{
+    width: 100vw;
+    height: 200vh;
+    background-color: yellow;
+   
+    background-image: url(./gamebg2.png);
+
+
+}
+
+
+.gameArea .controls{
+    display: flex;
+    width: 100%;
+    height: 50%;
+    opacity: 0;
+    position: absolute;
+    bottom: 0;
+  
+
+}
+.controls div{
+    flex: 1;
+}
+.left{
+    background-color: yellow;
+}
+.right{
+    background-color: lightblue;
+}
+.fighter{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    bottom: 50px;
+    left: 40vw;
+}
+.fighter img{
+    z-index: 1000
+}
+/* .enemy{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    left: 320px;
+    top: 20px;
+}
+.enemy img{
+    width: 50px;
+    height: 50px;
+} */
+.fireButton{
+    width: 80px;
+    height: 80px;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 250px;
+    right: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: -2px 2px 2px grey;
+    opacity: 0.5;
+    z-index: 10000;
+}
+.fireButton img{
+    width: 50px;
+    height: 50px;
+    /* position: absolute;
+    left: 50%;
+    top: 50%; */
+}
+/* .effect{
+    width: 100vw;
+    height: 100vw;
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    top: 0;
+text-align: center;    
+opacity: 0.3;
+}
+.effect img{
+    width: 40%;
+    height: 500px;
+} */
+
+.score{
+    position: absolute;
+    left: 10px;
+    z-index: 1000000;
+    color: white;
+    
+}
+
+@keyframes blast {
+    0%{
+        transform: scale(1);
+    }
+    100%{
+        background-color: red;
+        transform: scale(0.1);
+        filter: blur(20px);
+        box-shadow: 5px 5px 5px grey;
+    }
+}
+.mrk{
+    height: 100vh;
+}
